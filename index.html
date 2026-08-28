@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AIComic</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #07153f;
+        }
+
+
+        /* =========================================
+           TOP BLUE ANNOUNCEMENT BAR
+        ========================================= */
+
+        .announcement-bar {
+
+            width: 100%;
+            height: 70px;
+
+            background: #020d2d;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+        }
+
+
+        .star {
+
+            color: #2584ff;
+
+            font-size: 30px;
+
+            margin: 0 15px;
+
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+
+            width: 100%;
+            max-width: 1200px;
+
+            margin: auto;
+
+            padding: 40px 35px 60px;
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            margin-bottom: 45px;
+
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .logo-area {
+
+            min-width: 300px;
+
+        }
+
+
+        .logo {
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 55px;
+
+            font-weight: bold;
+
+            color: #07153f;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .navigation {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        .navigation a {
+
+            text-decoration: none;
+
+            font-size: 21px;
+
+            color: #777777;
+
+        }
+
+
+        .navigation a:first-child {
+
+            color: #07153f;
+
+        }
+
+
+        .navigation a:hover {
+
+            color: #1265e8;
+
+        }
+
+
+        .divider {
+
+            color: #777777;
+
+        }
+
+
+        /* =========================================
+           SEARCH BAR
+        ========================================= */
+
+        .search-wrapper {
+
+            flex: 1;
+
+        }
+
+
+        .search-box {
+
+            height: 72px;
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 22px;
+
+            box-shadow:
+
+                0 5px 20px rgba(0,0,0,0.08),
+
+                0 1px 4px rgba(0,0,0,0.04);
+
+        }
+
+
+        .mic {
+
+            font-size: 26px;
+
+            margin-right: 18px;
+
+        }
+
+
+        #searchInput {
+
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            font-size: 20px;
+
+            color: #07153f;
+
+        }
+
+
+        #searchInput::placeholder {
+
+            color: #888888;
+
+        }
+
+
+        .search-icon {
+
+            font-size: 34px;
+
+            color: #07153f;
+
+        }
+
+
+        /* =========================================
+           MENU BUTTON
+        ========================================= */
+
+        .menu-button {
+
+            width: 72px;
+
+            height: 72px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: white;
+
+            box-shadow:
+
+                0 5px 20px rgba(0,0,0,0.08),
+
+                0 1px 4px rgba(0,0,0,0.04);
+
+            font-size: 30px;
+
+            color: #07153f;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =========================================
+           VIDEO SECTION
+        ========================================= */
+
+        .video-section {
+
+            width: 100%;
+
+            background: white;
+
+            border-radius: 30px;
+
+            padding: 28px 30px 20px;
+
+            box-shadow:
+
+                0 5px 25px rgba(0,0,0,0.08);
+
+            margin-bottom: 50px;
+
+        }
+
+
+        .section-title {
+
+            display: inline-block;
+
+            position: relative;
+
+            color: #07153f;
+
+            font-size: 22px;
+
+            font-weight: 500;
+
+            padding-bottom: 18px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .section-title::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: 0;
+
+            width: 68px;
+
+            height: 4px;
+
+            background: #1265e8;
+
+            border-radius: 10px;
+
+        }
+
+
+        /* =========================================
+           VIDEO
+        ========================================= */
+
+        .video-container {
+
+            width: 100%;
+
+            aspect-ratio: 16 / 9;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            position: relative;
+
+            background: #111111;
+
+            cursor: pointer;
+
+        }
+
+
+        #storyVideo {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           PLAY BUTTON
+        ========================================= */
+
+        .video-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            pointer-events: none;
+
+        }
+
+
+        .play-button {
+
+            width: 125px;
+
+            height: 125px;
+
+            background: rgba(255,255,255,0.96);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        .play-button::after {
+
+            content: "";
+
+            width: 0;
+
+            height: 0;
+
+            border-top: 20px solid transparent;
+
+            border-bottom: 20px solid transparent;
+
+            border-left: 30px solid #07153f;
+
+            margin-left: 8px;
+
+        }
+
+
+        /* =========================================
+           TRENDING HEADER
+        ========================================= */
+
+        .trending-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .trending-title {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            font-size: 28px;
+
+            color: #07153f;
+
+        }
+
+
+        .fire {
+
+            font-size: 32px;
+
+        }
+
+
+        .view-all {
+
+            text-decoration: none;
+
+            color: #1265e8;
+
+            font-size: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .arrow {
+
+            font-size: 30px;
+
+        }
+
+
+        /* =========================================
+           FOUR STORY RECTANGLES
+        ========================================= */
+
+        .stories-grid {
+
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .story-card {
+
+            height: 390px;
+
+            border-radius: 22px;
+
+            background: #f8f8f8;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+
+                0 6px 18px rgba(0,0,0,0.10);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+        }
+
+
+        /* =========================================
+           LOADING TEXT
+        ========================================= */
+
+        .loading {
+
+            font-size: 24px;
+
+            font-weight: 600;
+
+            letter-spacing: 2px;
+
+            color: #07153f;
+
+        }
+
+
+        .loading span {
+
+            animation: loadingDots 1.4s infinite;
+
+        }
+
+
+        .loading span:nth-child(2) {
+
+            animation-delay: 0.2s;
+
+        }
+
+
+        .loading span:nth-child(3) {
+
+            animation-delay: 0.4s;
+
+        }
+
+
+        @keyframes loadingDots {
+
+            0% {
+                opacity: 0.2;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.2;
+            }
+
+        }
+
+
+        /* =========================================
+           NO SEARCH RESULT
+        ========================================= */
+
+        .no-results {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 30px;
+
+            font-size: 20px;
+
+            color: #777777;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 1000px) {
+
+            .header {
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .logo-area {
+
+                min-width: auto;
+
+            }
+
+
+            .search-wrapper {
+
+                width: 100%;
+
+                flex-basis: 100%;
+
+                order: 3;
+
+            }
+
+
+            .stories-grid {
+
+                grid-template-columns: repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .announcement-bar {
+
+                height: 55px;
+
+                font-size: 17px;
+
+            }
+
+
+            .star {
+
+                font-size: 20px;
+
+                margin: 0 8px;
+
+            }
+
+
+            .container {
+
+                padding: 25px 15px 40px;
+
+            }
+
+
+            .logo {
+
+                font-size: 40px;
+
+            }
+
+
+            .navigation {
+
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .navigation a {
+
+                font-size: 16px;
+
+            }
+
+
+            .search-box {
+
+                height: 58px;
+
+            }
+
+
+            #searchInput {
+
+                font-size: 16px;
+
+            }
+
+
+            .menu-button {
+
+                width: 58px;
+
+                height: 58px;
+
+            }
+
+
+            .video-section {
+
+                padding: 20px 15px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .video-container {
+
+                border-radius: 17px;
+
+            }
+
+
+            .play-button {
+
+                width: 80px;
+
+                height: 80px;
+
+            }
+
+
+            .play-button::after {
+
+                border-top-width: 13px;
+
+                border-bottom-width: 13px;
+
+                border-left-width: 20px;
+
+            }
+
+
+            .trending-title {
+
+                font-size: 22px;
+
+            }
+
+
+            .view-all {
+
+                font-size: 16px;
+
+            }
+
+
+            .stories-grid {
+
+                grid-template-columns: repeat(2, 1fr);
+
+                gap: 12px;
+
+            }
+
+
+            .story-card {
+
+                height: 280px;
+
+                border-radius: 16px;
+
+            }
+
+
+            .loading {
+
+                font-size: 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         TOP ANNOUNCEMENT BAR
+    ========================================= -->
+
+    <div class="announcement-bar">
+
+        <span class="star">✦</span>
+
+        Our stories, ready to be read
+
+        <span class="star">✦</span>
+
+    </div>
+
+
+
+    <div class="container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="header">
+
+
+            <div class="logo-area">
+
+
+                <div class="logo">
+                    AIComic
+                </div>
+
+
+                <nav class="navigation">
+
+
+                    <a href="index.html">
+                        Home
+                    </a>
+
+
+                    <span class="divider">
+                        |
+                    </span>
+
+
+                    <a href="contact.html">
+                        Contact
+                    </a>
+
+
+                    <span class="divider">
+                        |
+                    </span>
+
+
+                    <a href="privacy.html">
+                        Privacy
+                    </a>
+
+
+                </nav>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 SEARCH
+            ================================== -->
+
+            <div class="search-wrapper">
+
+
+                <div class="search-box">
+
+
+                    <span class="mic">
+                        🎙
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search stories..."
+                        autocomplete="off"
+                    >
+
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 MENU
+            ================================== -->
+
+            <button class="menu-button">
+
+                ☰
+
+            </button>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             MOVING VIDEO
+        ====================================== -->
+
+        <section
+            class="video-section"
+            id="movingVideoSection"
+            data-search="moving video moving video of the story video story"
+        >
+
+
+            <h2 class="section-title">
+
+                Moving video of the story
+
+            </h2>
+
+
+            <div
+                class="video-container"
+                onclick="openChapters()"
+            >
+
+
+                <video
+                    id="storyVideo"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                ></video>
+
+
+                <div class="video-overlay">
+
+                    <div class="play-button"></div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             TRENDING STORIES
+        ====================================== -->
+
+        <section
+            class="trending-section"
+            id="trendingSection"
+            data-search="trending stories"
+        >
+
+
+            <div class="trending-header">
+
+
+                <h2 class="trending-title">
+
+                    <span class="fire">
+                        🔥
+                    </span>
+
+                    Trending Stories
+
+                </h2>
+
+
+                <a
+                    href="#"
+                    class="view-all"
+                >
+
+                    View all
+
+                    <span class="arrow">
+                        →
+                    </span>
+
+                </a>
+
+
+            </div>
+
+
+
+            <!-- =================================
+                 FOUR LOADING RECTANGLES
+            ================================== -->
+
+            <div
+                class="stories-grid"
+                id="storiesGrid"
+            >
+
+
+                <!-- BOX 1 -->
+
+                <div
+                    class="story-card"
+                    data-search="loading story"
+                >
+
+                    <div class="loading">
+
+                        LOADING
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOX 2 -->
+
+                <div
+                    class="story-card"
+                    data-search="loading story"
+                >
+
+                    <div class="loading">
+
+                        LOADING
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOX 3 -->
+
+                <div
+                    class="story-card"
+                    data-search="loading story"
+                >
+
+                    <div class="loading">
+
+                        LOADING
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- BOX 4 -->
+
+                <div
+                    class="story-card"
+                    data-search="loading story"
+                >
+
+                    <div class="loading">
+
+                        LOADING
+                        <span>.</span>
+                        <span>.</span>
+                        <span>.</span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div
+                class="no-results"
+                id="noResults"
+            >
+
+                No results found.
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        /* =========================================
+           VIDEO
+        ========================================= */
+
+        const VIDEO_URL =
+            "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+
+
+        const video =
+            document.getElementById("storyVideo");
+
+
+        video.src =
+            VIDEO_URL;
+
+
+        /*
+            Autoplay is muted because browsers
+            normally block autoplay with sound.
+        */
+
+        video.play().catch(function() {
+
+            console.log(
+                "Autoplay needs user interaction."
+            );
+
+        });
+
+
+
+        /* =========================================
+           VIDEO → CHAPTERS PAGE
+        ========================================= */
+
+        function openChapters() {
+
+            window.location.href =
+                "chapters.html";
+
+        }
+
+
+
+        /* =========================================
+           SEARCH
+        ========================================= */
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+
+        const movingVideoSection =
+            document.getElementById(
+                "movingVideoSection"
+            );
+
+
+        const trendingSection =
+            document.getElementById(
+                "trendingSection"
+            );
+
+
+        const storyCards =
+            document.querySelectorAll(
+                ".story-card"
+            );
+
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        searchInput.addEventListener(
+            "input",
+            function() {
+
+
+                const searchText =
+                    searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+                /* =============================
+                   NOTHING SEARCHED
+                ============================= */
+
+                if (searchText === "") {
+
+                    movingVideoSection.style.display =
+                        "block";
+
+                    trendingSection.style.display =
+                        "block";
+
+                    storyCards.forEach(
+                        function(card) {
+
+                            card.style.display =
+                                "flex";
+
+                        }
+                    );
+
+
+                    noResults.style.display =
+                        "none";
+
+                    return;
+
+                }
+
+
+
+                let found =
+                    false;
+
+
+
+                /* =============================
+                   SEARCH MOVING VIDEO
+                ============================= */
+
+                const videoWords =
+                    movingVideoSection
+                    .dataset.search
+                    .toLowerCase();
+
+
+                if (
+                    videoWords.includes(
+                        searchText
+                    )
+                ) {
+
+                    movingVideoSection.style.display =
+                        "block";
+
+                    found = true;
+
+                }
+
+                else {
+
+                    movingVideoSection.style.display =
+                        "none";
+
+                }
+
+
+
+                /* =============================
+                   SEARCH TRENDING STORIES
+                ============================= */
+
+                const trendingWords =
+                    trendingSection
+                    .dataset.search
+                    .toLowerCase();
+
+
+                if (
+                    trendingWords.includes(
+                        searchText
+                    )
+                ) {
+
+                    trendingSection.style.display =
+                        "block";
+
+                    found = true;
+
+                }
+
+
+
+                /* =============================
+                   SEARCH FOUR BOXES
+                ============================= */
+
+                storyCards.forEach(
+                    function(card) {
+
+
+                        const cardWords =
+                            card.dataset.search
+                            .toLowerCase();
+
+
+                        if (
+                            cardWords.includes(
+                                searchText
+                            )
+                        ) {
+
+                            card.style.display =
+                                "flex";
+
+                            found = true;
+
+                        }
+
+                        else {
+
+                            card.style.display =
+                                "none";
+
+                        }
+
+
+                    }
+                );
+
+
+
+                /* =============================
+                   NO RESULTS
+                ============================= */
+
+                if (!found) {
+
+                    noResults.style.display =
+                        "block";
+
+                }
+
+                else {
+
+                    noResults.style.display =
+                        "none";
+
+                }
+
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
