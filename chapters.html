@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AIComic - Chapters</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #ffffff;
+            color: #07153f;
+        }
+
+
+        /* =========================================
+           TOP ANNOUNCEMENT BAR
+        ========================================= */
+
+        .announcement-bar {
+
+            width: 100%;
+            height: 70px;
+
+            background: #020d2d;
+
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 25px;
+
+        }
+
+
+        .star {
+
+            color: #2584ff;
+
+            font-size: 30px;
+
+            margin: 0 15px;
+
+        }
+
+
+        /* =========================================
+           MAIN CONTAINER
+        ========================================= */
+
+        .container {
+
+            width: 100%;
+            max-width: 1000px;
+
+            margin: auto;
+
+            padding: 45px 35px 70px;
+
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+
+            margin-bottom: 40px;
+
+        }
+
+
+        .logo {
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 55px;
+
+            font-weight: bold;
+
+            color: #07153f;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        /* =========================================
+           NAVIGATION
+        ========================================= */
+
+        .navigation {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 25px;
+
+        }
+
+
+        .navigation a {
+
+            text-decoration: none;
+
+            color: #777777;
+
+            font-size: 21px;
+
+        }
+
+
+        .navigation a:hover {
+
+            color: #1265e8;
+
+        }
+
+
+        .divider {
+
+            color: #777777;
+
+        }
+
+
+        /* =========================================
+           POSTER
+        ========================================= */
+
+        .poster {
+
+            width: 100%;
+
+            min-height: 600px;
+
+            border-radius: 30px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #111111;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        /* =========================================
+           PUT YOUR POSTER IMAGE HERE
+        ========================================= */
+
+        .poster-image {
+
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 600px;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        /* =========================================
+           DARK OVERLAY
+        ========================================= */
+
+        .poster::after {
+
+            content: "";
+
+            position: absolute;
+
+            inset: 0;
+
+            background: linear-gradient(
+
+                to top,
+
+                rgba(0,0,0,0.90),
+
+                rgba(0,0,0,0.25),
+
+                rgba(0,0,0,0.05)
+
+            );
+
+        }
+
+
+        /* =========================================
+           INFORMATION ON POSTER
+        ========================================= */
+
+        .poster-content {
+
+            position: absolute;
+
+            z-index: 2;
+
+            left: 45px;
+
+            right: 45px;
+
+            bottom: 40px;
+
+            color: white;
+
+        }
+
+
+        .story-title {
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 48px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .blue-line {
+
+            width: 70px;
+
+            height: 4px;
+
+            background: #2584ff;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .description {
+
+            max-width: 750px;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            margin-bottom: 20px;
+
+            color: #f1f1f1;
+
+        }
+
+
+        /* =========================================
+           ONGOING
+        ========================================= */
+
+        .status {
+
+            display: inline-block;
+
+            padding: 9px 18px;
+
+            border-radius: 20px;
+
+            background: #1265e8;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================================
+           CHAPTERS BOX
+        ========================================= */
+
+        .chapters-box {
+
+            background: white;
+
+            border-radius: 28px;
+
+            padding: 35px;
+
+            box-shadow:
+
+                0 5px 25px rgba(0,0,0,0.08);
+
+        }
+
+
+        .chapters-title {
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 34px;
+
+            color: #07153f;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        /* =========================================
+           CHAPTER LIST
+        ========================================= */
+
+        .chapter-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+
+        }
+
+
+        .chapter {
+
+            width: 100%;
+
+            min-height: 70px;
+
+            border-radius: 18px;
+
+            background: #f7f8fb;
+
+            border: 1px solid #eeeeee;
+
+            display: flex;
+
+            align-items: center;
+
+            padding: 0 25px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .chapter:hover {
+
+            background: #eef4ff;
+
+            transform: translateX(5px);
+
+        }
+
+
+        .chapter a {
+
+            width: 100%;
+
+            text-decoration: none;
+
+            color: #07153f;
+
+            font-size: 21px;
+
+            font-weight: 600;
+
+        }
+
+
+        .chapter-number {
+
+            color: #1265e8;
+
+            margin-right: 10px;
+
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            .announcement-bar {
+
+                height: 55px;
+
+                font-size: 17px;
+
+            }
+
+
+            .star {
+
+                font-size: 20px;
+
+                margin: 0 8px;
+
+            }
+
+
+            .container {
+
+                padding: 25px 15px 50px;
+
+            }
+
+
+            .logo {
+
+                font-size: 40px;
+
+            }
+
+
+            .navigation {
+
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+            }
+
+
+            .navigation a {
+
+                font-size: 16px;
+
+            }
+
+
+            .poster {
+
+                min-height: 500px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .poster-image {
+
+                min-height: 500px;
+
+            }
+
+
+            .poster-content {
+
+                left: 25px;
+
+                right: 25px;
+
+                bottom: 25px;
+
+            }
+
+
+            .story-title {
+
+                font-size: 34px;
+
+            }
+
+
+            .description {
+
+                font-size: 16px;
+
+            }
+
+
+            .chapters-box {
+
+                padding: 25px 20px;
+
+                border-radius: 20px;
+
+            }
+
+
+            .chapters-title {
+
+                font-size: 28px;
+
+            }
+
+
+            .chapter {
+
+                min-height: 62px;
+
+                padding: 0 18px;
+
+            }
+
+
+            .chapter a {
+
+                font-size: 18px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         TOP BAR
+    ========================================= -->
+
+    <div class="announcement-bar">
+
+        <span class="star">✦</span>
+
+        Our stories, ready to be read
+
+        <span class="star">✦</span>
+
+    </div>
+
+
+
+    <div class="container">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="header">
+
+
+            <div class="logo">
+
+                AIComic
+
+            </div>
+
+
+            <nav class="navigation">
+
+
+                <a href="index.html">
+                    Home
+                </a>
+
+
+                <span class="divider">
+                    |
+                </span>
+
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+
+                <span class="divider">
+                    |
+                </span>
+
+
+                <a href="privacy.html">
+                    Privacy
+                </a>
+
+
+            </nav>
+
+
+        </header>
+
+
+
+        <!-- =====================================
+             POSTER + STORY INFORMATION
+        ====================================== -->
+
+        <section class="poster">
+
+
+            <!--
+                YOUR POSTER IMAGE
+
+                Later, put your poster image inside
+                an "images" folder and change:
+
+                images/poster.jpg
+
+                to your actual file name.
+            -->
+
+            <img
+                class="poster-image"
+                src="images/poster.jpg"
+                alt="Story Poster"
+            >
+
+
+            <!-- =================================
+                 INFORMATION ON POSTER
+            ================================== -->
+
+            <div class="poster-content">
+
+
+                <h1 class="story-title">
+
+                    Story Title
+
+                </h1>
+
+
+                <div class="blue-line"></div>
+
+
+                <p class="description">
+
+                    Description of the story----------
+
+                </p>
+
+
+                <span class="status">
+
+                    Ongoing
+
+                </span>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================
+             CHAPTERS
+        ====================================== -->
+
+        <section class="chapters-box">
+
+
+            <h2 class="chapters-title">
+
+                Chapters
+
+            </h2>
+
+
+            <div class="chapter-list">
+
+
+                <!-- CHAPTER 1 -->
+
+                <div class="chapter">
+
+                    <a href="chapter1.html">
+
+                        <span class="chapter-number">
+                            Chapter 1
+                        </span>
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- CHAPTER 2 -->
+
+                <div class="chapter">
+
+                    <a href="chapter2.html">
+
+                        <span class="chapter-number">
+                            Chapter 2
+                        </span>
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- CHAPTER 3 -->
+
+                <div class="chapter">
+
+                    <a href="chapter3.html">
+
+                        <span class="chapter-number">
+                            Chapter 3
+                        </span>
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- CHAPTER 4 -->
+
+                <div class="chapter">
+
+                    <a href="chapter4.html">
+
+                        <span class="chapter-number">
+                            Chapter 4
+                        </span>
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+
+                <!-- CHAPTER 5 -->
+
+                <div class="chapter">
+
+                    <a href="chapter5.html">
+
+                        <span class="chapter-number">
+                            Chapter 5
+                        </span>
+
+                        →
+
+                    </a>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</body>
+
+</html>
